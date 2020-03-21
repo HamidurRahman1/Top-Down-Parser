@@ -12,7 +12,7 @@ public abstract class LexAnalyzer extends IO
     public static String t; // holds an extracted token
     public static State state; // the current state of the DFA
 
-    private static State nextState[][] = new State[23][128];        // n a 22
+    private static State nextState[][] = new State[22][128];
 
     // This array implements the state transition function State x (ASCII char set) --> State.
     // The state argument is converted to its ordinal number used as
@@ -101,7 +101,7 @@ public abstract class LexAnalyzer extends IO
 
     private static void setNextState()
     {
-        for (int s = 0; s <= 22; s++ )      // n a 21
+        for (int s = 0; s <= 21; s++ )
             for (int c = 0; c <= 127; c++ )
                 nextState[s][c] = State.UNDEF;
 

@@ -22,7 +22,6 @@ public enum State
     RParen,          // 15         )
     LBrace,          // 16         {
     RBrace,          // 17         }
-    Semicolon,       //             ;       // n a
 
     // non-final states                 string recognized
 

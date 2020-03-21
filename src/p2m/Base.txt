@@ -1,0 +1,26 @@
+
+abstract class FunDefList   {}
+
+    class FunDef extends FunDefList {}
+
+abstract class FunDef       {}
+
+abstract class Header       {}
+
+abstract class FunName      {}
+
+abstract class ParameterList{}
+
+abstract class Exp          {}
+
+abstract class FunExp       {}
+
+abstract class FunOp        {}
+
+abstract class ArithOp      {}
+
+abstract class BoolOp       {}
+
+abstract class CompOp       {}
+
+abstract class ExpList      {}
