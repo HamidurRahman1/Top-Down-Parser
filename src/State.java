@@ -44,22 +44,22 @@ public enum State
 
     UNDEF;
 
-    boolean isFinal()
+    public boolean isFinal()
     {
         return this.compareTo(State.RBrace) <= 0;
     }
 
-    boolean isArithOp()
+    public boolean isArithOp()
     {
         return this.compareTo(Div) <= 0;
     }
 
-    boolean isCompOp()
+    public boolean isCompOp()
     {
         return this.compareTo(Lt) >= 0 && this.compareTo(Eq) <= 0;
     }
 
-    boolean isBoolOp()
+    public boolean isBoolOp()
     {
         return this.compareTo(Keyword_or) >= 0 && this.compareTo(Keyword_not) <= 0;
     }
