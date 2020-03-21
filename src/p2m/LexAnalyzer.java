@@ -1,3 +1,5 @@
+package p2m;
+
 import java.util.HashMap;
 
 public abstract class LexAnalyzer extends IO
