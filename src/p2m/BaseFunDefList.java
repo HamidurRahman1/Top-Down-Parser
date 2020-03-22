@@ -1,6 +1,6 @@
 package p2m;
 
-public abstract class FunDefList
+public abstract class BaseFunDefList
 {
-    abstract void printParseTree(String indent);
+    public abstract void printParseTree(String indent);
 }

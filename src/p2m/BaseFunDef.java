@@ -1,4 +1,6 @@
 package p2m;
 
-public class BaseFunDef {
+public abstract class BaseFunDef
+{
+    public abstract void printParseTree(String indent);
 }
