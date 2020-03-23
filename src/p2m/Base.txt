@@ -1,3 +1,64 @@
+////////////////////// New2 //////////////////////////////////////
+
+BaseFunDefList {}
+    -> FunDefList {}
+
+BaseFunDef {}
+    -> FunDef {}
+
+BaseHeader {}
+    -> Header {}
+
+BaseFunName {}
+    -> FunName {}
+
+BaseParameterList {}
+    -> ParameterList {}
+
+BaseExp {}
+    -> Exp {}
+        -> ExpId {}
+        -> ExpInt {}
+        -> ExpFloat {}
+        -> ExpFloatE {}
+        -> ExpFloatF {}
+        -> ExpNil {}
+        -> FunExp {}
+        -> ExpIfTheElse {}
+
+BaseFunOp {}
+    -> FunOp {}
+        -> FunOpId {}
+        -> FunOpPair {}
+        -> FunOpFirst {}
+        -> FunOpSecond {}
+        -> ArithOp {}
+            -> ArithOpAdd {}
+            -> ArithOpSub {}
+            -> ArithOpMul {}
+            -> ArithOpDiv {}
+        -> BoolOp {}
+            -> BoolOpOr {}
+            -> BoolOpAnd {}
+            -> BoolOpNot {}
+        -> CompOP {}
+            -> CompOPLt {}
+            -> CompOPLe {}
+            -> CompOPGt {}
+            -> CompOPGe {}
+            -> CompOPEq {}
+
+BaseExpList {}
+    -> ExpList {}
+
+IO {}
+    -> LexAnalyzer {}
+        -> Parser {}
+
+State {}
+
+////////////////////// Old1 //////////////////////////////////////
+
 
 abstract class FunDefList   {}
     - class FunDef extends FunDefList {}
