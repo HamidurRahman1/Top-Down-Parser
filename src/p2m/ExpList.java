@@ -1,9 +1,8 @@
 package p2m;
 
-public class FunDef extends BaseFunDef
+public class ExpList extends BaseExpList
 {
-     public Header header;
-     public Exp exp;
+
 
     @Override
     public void printParseTree(String indent) {
