@@ -1,22 +1,19 @@
 package p2m;
 
-import java.util.List;
-
 public class ParameterList extends BaseParameterList
 {
-//    public ParameterId parameterId;
-//    public ParameterList parameterList;
+    public ParameterId parameterId;
+    public ParameterList parameterList;
 
-    public List<ParameterId> parameterIdList;
-
-    public ParameterList()
+    public ParameterList(ParameterId parameterId)
     {
-        this.parameterIdList = null;
+        this.parameterId = parameterId;
     }
 
-    public ParameterList(List<ParameterId> parameterIdList)
+    public ParameterList(ParameterId parameterId, ParameterList parameterList)
     {
-        this.parameterIdList = parameterIdList;
+        this.parameterId = parameterId;
+        this.parameterList = parameterList;
     }
 
     @Override
