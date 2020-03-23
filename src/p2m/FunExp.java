@@ -1,17 +1,14 @@
 package p2m;
 
-import java.util.List;
-
-public class FunExp extends BaseFunExp
+public class FunExp extends Exp
 {
     public FunOp funOp;
-//    public ExpList expList;
-    public List<ExpList> expList;
+    public ExpList exp;
 
-    public FunExp(FunOp funOp, List<ExpList> expList)
+    public FunExp(FunOp funOp, ExpList exp)
     {
         this.funOp = funOp;
-        this.expList = expList;
+        this.exp = exp;
     }
 
     @Override
