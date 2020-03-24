@@ -19,6 +19,15 @@ public class ExpList extends BaseExpList
     @Override
     public void printParseTree(String indent)
     {
+        IO.displayln(indent + indent.length() + " <exp list>");
 
+        indent += " ";
+
+        exp.printParseTree(indent);
+
+        if(expList != null)
+        {
+            expList.printParseTree(indent);
+        }
     }
 }

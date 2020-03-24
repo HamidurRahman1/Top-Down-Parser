@@ -16,6 +16,16 @@ public class ExpIfThenElse extends Exp
     @Override
     public void printParseTree(String indent)
     {
+        printExp(indent);
+        String sLength = indent + " ";
 
+        IO.displayln(sLength + sLength.length() + " if");
+        ifExp.printParseTree(sLength);
+
+        IO.displayln(sLength + sLength.length() + " then");
+        thenExp.printParseTree(sLength);
+
+        IO.displayln(sLength + sLength.length() + " else");
+        elseExp.printParseTree(sLength);
     }
 }
