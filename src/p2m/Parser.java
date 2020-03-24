@@ -9,7 +9,7 @@ public abstract class Parser extends LexAnalyzer
         // argv[0]: input file containing a fun def list
         // argv[1]: output file displaying the parse tree
 
-        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/inputs/in1.txt",
+        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/inputs/test.txt",
                 "/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/outputs/out1.txt");
 
         setLex();
@@ -18,6 +18,8 @@ public abstract class Parser extends LexAnalyzer
 
         // build a parse tree
         FunDefList funDefList = getFunDefList();
+        getToken();
+        System.out.println("list - "+t);
 
         if (!t.isEmpty())
         {
@@ -35,8 +37,8 @@ public abstract class Parser extends LexAnalyzer
     public static FunDefList getFunDefList()
     {
         FunDef funDef = getFunDef();
-
-
+        getToken();
+        System.out.println("fundeflist - "+t);
 
         return new FunDefList(funDef, null);
     }
@@ -44,15 +46,24 @@ public abstract class Parser extends LexAnalyzer
     public static FunDef getFunDef()
     {
         Header header = getHeader();
-
         getToken();
+        System.out.println("fundef - "+t);
 
         return new FunDef(header, null);
     }
 
     public static Header getHeader()
     {
+        FunName funName = getFunName();
+        System.out.println("header - "+funName.id);
+        return null;
+    }
 
+    public static FunName getFunName()
+    {
+        if(!t.isEmpty())
+            return new FunName(t);
+        return null;
     }
 
     public static void errorMsg(int messageKey)
