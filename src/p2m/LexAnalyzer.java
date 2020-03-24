@@ -59,10 +59,6 @@ public abstract class LexAnalyzer extends IO
             {
                 if ( state.isFinal() )
                 {
-//                    if(state == State.Id)
-//                        keywordCheck();
-//                    return 1;
-
                      return 1; // valid token extracted
                 }
                 else // "c" is an unexpected character
@@ -78,17 +74,6 @@ public abstract class LexAnalyzer extends IO
                 t = t+c;
                 a = getNextChar();
             }
-//
-//            if(state.isFinal())
-//            {
-//                if(state == State.Id)
-//                    keywordCheck();
-//                return 1;
-//            }
-//            else
-//            {
-//                return 0;
-//            }
         }
 
         // end-of-stream is reached while a token is being extracted

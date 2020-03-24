@@ -17,7 +17,7 @@ public abstract class Parser extends LexAnalyzer
         getToken();
 
         // build a parse tree
-        FunDefList funDefList = funDefList();
+        FunDefList funDefList = getFunDefList();
 
         if (!t.isEmpty())
         {
@@ -32,17 +32,27 @@ public abstract class Parser extends LexAnalyzer
         closeIO();
     }
 
-    public static FunDefList funDefList()
+    public static FunDefList getFunDefList()
     {
-        FunDef funDef = funDef();
-        return new FunDefList(null, null);
+        FunDef funDef = getFunDef();
+
+
+
+        return new FunDefList(funDef, null);
     }
 
-    public static FunDef funDef()
+    public static FunDef getFunDef()
+    {
+        Header header = getHeader();
+
+        getToken();
+
+        return new FunDef(header, null);
+    }
+
+    public static Header getHeader()
     {
 
-
-        return new FunDef(null, null);
     }
 
     public static void errorMsg(int messageKey)
