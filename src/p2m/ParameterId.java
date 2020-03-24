@@ -8,9 +8,4 @@ public class ParameterId
     {
         this.id = id;
     }
-
-    public void printParseTree(String indent)
-    {
-
-    }
 }

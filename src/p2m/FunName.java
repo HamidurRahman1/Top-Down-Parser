@@ -10,7 +10,8 @@ public class FunName extends BaseFunName
     }
 
     @Override
-    public void printParseTree(String indent) {
-
+    public void printParseTree(String indent)
+    {
+        IO.displayln(indent + indent.length() + " <fun name> " + id);
     }
 }

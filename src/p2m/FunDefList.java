@@ -19,6 +19,13 @@ public class FunDefList extends BaseFunDefList
     @Override
     public void printParseTree(String indent)
     {
-
+        if(funDef != null)
+        {
+            funDef.printParseTree(indent);
+        }
+        if(funDefList != null)
+        {
+            funDefList.printParseTree(indent);
+        }
     }
 }

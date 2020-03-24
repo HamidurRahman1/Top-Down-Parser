@@ -2,26 +2,47 @@ package p2m;
 
 public abstract class Parser extends LexAnalyzer
 {
-    static boolean errorFound = false;
+    public static boolean errorFound = false;
 
-    public static void main(String argv[])
+    public static void main(String[] argv) throws NullPointerException
     {
         // argv[0]: input file containing a fun def list
         // argv[1]: output file displaying the parse tree
 
         setIO("/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/inputs/in1.txt",
                 "/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/outputs/out1.txt");
+
         setLex();
 
         getToken();
 
-        FunDefList funDefList = funDefList(); // build a parse tree
-        if ( ! t.isEmpty() )
+        // build a parse tree
+        FunDefList funDefList = funDefList();
+
+        if (!t.isEmpty())
+        {
             errorMsg(5);
-        else if ( ! errorFound )
-            funDefList.printParseTree(""); // print the parse tree in linearly indented form in argv[1] file
+        }
+        else if(!errorFound)
+        {
+            // print the parse tree in linearly indented form in argv[1] file
+            funDefList.printParseTree("");
+        }
 
         closeIO();
+    }
+
+    public static FunDefList funDefList()
+    {
+        FunDef funDef = funDef();
+        return new FunDefList(null, null);
+    }
+
+    public static FunDef funDef()
+    {
+
+
+        return new FunDef(null, null);
     }
 
     public static void errorMsg(int messageKey)
@@ -38,10 +59,5 @@ public abstract class Parser extends LexAnalyzer
             case 4:	displayln(" ; expected"); return;
             case 5:	displayln(" id expected"); return;
         }
-    }
-
-    public static FunDefList funDefList()
-    {
-        return null;
     }
 }

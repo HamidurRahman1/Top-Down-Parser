@@ -12,6 +12,10 @@ public class ExpFloat extends Exp
     @Override
     public void printParseTree(String indent)
     {
+        IO.displayln(indent + indent.length() + " <exp>");
 
+        indent += " ";
+
+        IO.displayln(indent + indent.length() + " " + expFloat);
     }
 }

@@ -14,6 +14,17 @@ public class FunDef extends BaseFunDef
     @Override
     public void printParseTree(String indent)
     {
+        IO.displayln(indent + indent.length() + " <fun def>");
 
+        if(header != null)
+        {
+            header.printParseTree(indent + " ");
+        }
+        if(exp != null)
+        {
+            exp.printParseTree(indent + " ");
+        }
+
+        IO.displayln(indent);
     }
 }
