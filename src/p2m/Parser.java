@@ -135,40 +135,91 @@ public abstract class Parser extends LexAnalyzer
         }
         else if(state.isArithOp())
         {
-            if(state == State.Add)
-            {
-                getToken();
-                return new ArithOpAdd();
-            }
-            else if(state == State.Sub)
-            {
-                getToken();
-                return new ArithOpSub();
-            }
-            else if(state == State.Mul)
-            {
-                getToken();
-                return new ArithOpMul();
-            }
-            else
-            {
-                getToken();
-                return new ArithOpDiv();
-            }
+            return getArithOp();
         }
         else if(state.isBoolOp())
         {
-            // all boolOps
-            return null;
+            return getBoolOp();
         }
         else if(state.isCompOp())
         {
-            // all compOps
-            return null;
+            return getCompOp();
         }
         else
         {
             return null;
+        }
+    }
+
+    public static CompOp getCompOp()
+    {
+        if(state == State.Lt)
+        {
+            getToken();
+            return new CompOpLt();
+        }
+        else if(state == State.Le)
+        {
+            getToken();
+            return new CompOpLe();
+        }
+        else if(state == State.Gt)
+        {
+            getToken();
+            return new CompOpGt();
+        }
+        else if(state == State.Ge)
+        {
+            getToken();
+            return new CompOpGe();
+        }
+        else
+        {
+            getToken();
+            return new CompOpEq();
+        }
+    }
+
+    public static BoolOp getBoolOp()
+    {
+        if(state == State.Keyword_or)
+        {
+            getToken();
+            return new BoolOpOr();
+        }
+        else if(state == State.Keyword_and)
+        {
+            getToken();
+            return new BoolOpAnd();
+        }
+        else
+        {
+            getToken();
+            return new BoolOpNot();
+        }
+    }
+
+    public static ArithOp getArithOp()
+    {
+        if(state == State.Add)
+        {
+            getToken();
+            return new ArithOpAdd();
+        }
+        else if(state == State.Sub)
+        {
+            getToken();
+            return new ArithOpSub();
+        }
+        else if(state == State.Mul)
+        {
+            getToken();
+            return new ArithOpMul();
+        }
+        else
+        {
+            getToken();
+            return new ArithOpDiv();
         }
     }
 

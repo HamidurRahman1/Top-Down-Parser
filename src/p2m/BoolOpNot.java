@@ -1,6 +1,6 @@
 package p2m;
 
-public class BoolNot extends BoolOp
+public class BoolOpNot extends BoolOp
 {
     @Override
     public void printParseTree(String indent)
