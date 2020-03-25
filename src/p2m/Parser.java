@@ -80,11 +80,15 @@ public abstract class Parser extends LexAnalyzer
 
 
             // check for close brace
-            return null;
+            return funExp;
         }
         else if(state == State.Keyword_if)
         {
             // check for ExpIfThenElse
+            getToken();
+
+
+
             return null;
         }
         else
@@ -98,11 +102,9 @@ public abstract class Parser extends LexAnalyzer
     {
         FunOp funOp = getFunOp();
 
-
-
         ExpList expList = getExpList();
 
-        return new FunExp(null, null);
+        return new FunExp(funOp, expList);
     }
 
     public static ExpList getExpList()
@@ -122,7 +124,7 @@ public abstract class Parser extends LexAnalyzer
             return null;
         }
 
-        return new ExpList(exp, expList);
+        return new ExpList(exp, null);
     }
 
     public static FunOp getFunOp()
@@ -150,7 +152,6 @@ public abstract class Parser extends LexAnalyzer
         }
         else if(state.isArithOp())
         {
-            System.out.println(t + " " + state);
             return getArithOp();
         }
         else if(state.isBoolOp())
@@ -163,6 +164,7 @@ public abstract class Parser extends LexAnalyzer
         }
         else
         {
+            errorMsg(1);
             return null;
         }
     }
