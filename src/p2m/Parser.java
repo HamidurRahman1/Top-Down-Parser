@@ -18,8 +18,15 @@ public abstract class Parser extends LexAnalyzer
 
         // build a parse tree
         FunDefList funDefList = getFunDefList();
-        getToken();
-        System.out.println("list - "+t);
+
+        System.out.println(t);
+
+        System.out.println(funDefList.funDef == null);
+        System.out.println(funDefList.funDef.header == null);
+        System.out.println(funDefList.funDef.header.funName == null);
+        System.out.println(funDefList.funDef.header.parameterList == null);
+
+        funDefList.printParseTree("");
 
         if (!t.isEmpty())
         {
@@ -37,8 +44,8 @@ public abstract class Parser extends LexAnalyzer
     public static FunDefList getFunDefList()
     {
         FunDef funDef = getFunDef();
-        getToken();
-        System.out.println("fundeflist - "+t);
+
+//        getToken();
 
         return new FunDefList(funDef, null);
     }
@@ -46,8 +53,8 @@ public abstract class Parser extends LexAnalyzer
     public static FunDef getFunDef()
     {
         Header header = getHeader();
+
         getToken();
-        System.out.println("fundef - "+t);
 
         return new FunDef(header, null);
     }
@@ -60,14 +67,7 @@ public abstract class Parser extends LexAnalyzer
         {
             getToken();
 
-            System.out.println("header after fun - "+t);
-
             ParameterList parameterList = getParameterList();
-
-            if(errorFound)
-            {
-                return null;
-            }
 
             if(parameterList == null)
             {
@@ -85,6 +85,7 @@ public abstract class Parser extends LexAnalyzer
     {
         if(state == State.Id)
         {
+            System.out.println("param -> " + t);
             ParameterList parameterListId = new ParameterList(new ParameterId(t));
             getToken();
             ParameterList parameterList = getParameterList();
@@ -107,8 +108,11 @@ public abstract class Parser extends LexAnalyzer
 
     public static FunName getFunName()
     {
-        if(!t.isEmpty() && state == State.Id)
+//        System.out.println(state + " " + t.isEmpty());
+
+        if(state == State.Id)
         {
+            System.out.println("fun name -> " + t);
             return new FunName(t);
         }
         else

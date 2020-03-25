@@ -1,1 +1,7 @@
-x : Syntax Error, unexpected symbol where id expected
+{ : Syntax Error, unexpected symbol where id expected
+0 <fun def>
+ 1 <header>
+  2 <fun name> square
+  2 <parameter list>
+
+( : Syntax Error, unexpected symbol where id expected
