@@ -75,7 +75,6 @@ public abstract class Parser extends LexAnalyzer
         else if(state == State.LParen)
         {
             getToken();
-            System.out.println(t + ' ' + state);
 
             FunExp funExp = getFunExp();
 
@@ -97,9 +96,11 @@ public abstract class Parser extends LexAnalyzer
 
     public static FunExp getFunExp()
     {
-        // get fun op
+        FunOp funOp = getFunOp();
 
-        // get exp list
+
+
+        ExpList expList = getExpList();
 
         return new FunExp(null, null);
     }
@@ -113,24 +114,47 @@ public abstract class Parser extends LexAnalyzer
     {
         if(state == State.Id)
         {
-            return null;
+            FunOpId funOpId = new FunOpId(t);
+            getToken();
+            return funOpId;
         }
         else if(state == State.Keyword_pair)
         {
-            return null;
+            getToken();
+            return new FunOpPair();
         }
         else if(state == State.Keyword_first)
         {
-            return null;
+            getToken();
+            return new FunOpFirst();
         }
         else if(state == State.Keyword_second)
         {
-            return null;
+            getToken();
+            return new FunOpSecond();
         }
         else if(state.isArithOp())
         {
-            // all arithOps
-            return null;
+            if(state == State.Add)
+            {
+                getToken();
+                return new ArithOpAdd();
+            }
+            else if(state == State.Sub)
+            {
+                getToken();
+                return new ArithOpSub();
+            }
+            else if(state == State.Mul)
+            {
+                getToken();
+                return new ArithOpMul();
+            }
+            else
+            {
+                getToken();
+                return new ArithOpDiv();
+            }
         }
         else if(state.isBoolOp())
         {
