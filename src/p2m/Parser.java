@@ -55,15 +55,67 @@ public abstract class Parser extends LexAnalyzer
     public static Header getHeader()
     {
         FunName funName = getFunName();
-        System.out.println("header - "+funName.id);
+
+        if(funName != null)
+        {
+            getToken();
+
+            System.out.println("header after fun - "+t);
+
+            ParameterList parameterList = getParameterList();
+
+            if(errorFound)
+            {
+                return null;
+            }
+
+            if(parameterList == null)
+            {
+                return new Header(funName);
+            }
+            else
+            {
+                return new Header(funName, parameterList);
+            }
+        }
+        return null;
+    }
+
+    public static ParameterList getParameterList()
+    {
+        if(state == State.Id)
+        {
+            ParameterList parameterListId = new ParameterList(new ParameterId(t));
+            getToken();
+            ParameterList parameterList = getParameterList();
+
+            if(parameterList != null || !errorFound)
+            {
+                parameterListId.parameterList = parameterList;
+                return parameterListId;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        errorMsg(5);
+
         return null;
     }
 
     public static FunName getFunName()
     {
-        if(!t.isEmpty())
+        if(!t.isEmpty() && state == State.Id)
+        {
             return new FunName(t);
-        return null;
+        }
+        else
+        {
+            errorMsg(5);
+            return null;
+        }
     }
 
     public static void errorMsg(int messageKey)
