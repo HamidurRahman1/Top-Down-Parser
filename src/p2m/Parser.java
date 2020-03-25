@@ -56,10 +56,6 @@ public abstract class Parser extends LexAnalyzer
 
     public static Exp getExp()
     {
-        System.out.println(t + ' ' + state);
-        getToken();
-        System.out.println(t + ' ' + state);
-
         if(state == State.Id)
         {
             return new ExpId(t);
@@ -76,8 +72,11 @@ public abstract class Parser extends LexAnalyzer
         {
             return new ExpNil();
         }
-        else if(state == State.LBrace)
+        else if(state == State.LParen)
         {
+            System.out.println(t + ' ' + state);
+            getToken();
+            System.out.println(t + ' ' + state);
             // implement fun exp
             // check for close brace
             return null;
