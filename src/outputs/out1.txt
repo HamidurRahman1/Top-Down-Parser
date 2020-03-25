@@ -1,4 +1,4 @@
-0 <fun def>
+* : Syntax Error, unexpected symbol where0 <fun def>
  1 <header>
   2 <fun name> square
   2 <parameter list>

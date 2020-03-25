@@ -51,30 +51,45 @@ public abstract class Parser extends LexAnalyzer
 
         Exp exp = getExp();
 
-        return new FunDef(header, null);
+        return new FunDef(header, exp);
     }
 
     public static Exp getExp()
     {
-        if(state == State.LParen)
+        System.out.println(t + ' ' + state);
+        getToken();
+        System.out.println(t + ' ' + state);
+
+        if(state == State.Id)
         {
-            String afterParen = t;
-            State now = state;
-            System.out.println(now + " " + afterParen);
-            getToken();
-            System.out.println(state + " " + t);
-            if(state == State.Id)
-            {
-                return new ExpId("");
-            }
-            else
-            {
-                return null;
-            }
+            return new ExpId(t);
+        }
+        else if(state == State.Int)
+        {
+            return new ExpInt(Integer.parseInt(t));
+        }
+        else if(state == State.Float || state == State.FloatE || state == State.FloatF)
+        {
+            return new ExpFloat(Float.parseFloat(t));
+        }
+        else if(state == State.Keyword_nil)
+        {
+            return new ExpNil();
+        }
+        else if(state == State.LBrace)
+        {
+            // implement fun exp
+            // check for close brace
+            return null;
+        }
+        else if(state == State.Keyword_if)
+        {
+            // check for ExpIfThenElse
+            return null;
         }
         else
         {
-            errorMsg(6);
+            errorMsg(7);
             return null;
         }
     }
