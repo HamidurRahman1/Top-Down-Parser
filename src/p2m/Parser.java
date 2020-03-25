@@ -74,10 +74,12 @@ public abstract class Parser extends LexAnalyzer
         }
         else if(state == State.LParen)
         {
-            System.out.println(t + ' ' + state);
             getToken();
             System.out.println(t + ' ' + state);
-            // implement fun exp
+
+            FunExp funExp = getFunExp();
+
+
             // check for close brace
             return null;
         }
@@ -89,6 +91,59 @@ public abstract class Parser extends LexAnalyzer
         else
         {
             errorMsg(7);
+            return null;
+        }
+    }
+
+    public static FunExp getFunExp()
+    {
+        // get fun op
+
+        // get exp list
+
+        return new FunExp(null, null);
+    }
+
+    public static ExpList getExpList()
+    {
+        return new ExpList(null, null);
+    }
+
+    public static FunOp getFunOp()
+    {
+        if(state == State.Id)
+        {
+            return null;
+        }
+        else if(state == State.Keyword_pair)
+        {
+            return null;
+        }
+        else if(state == State.Keyword_first)
+        {
+            return null;
+        }
+        else if(state == State.Keyword_second)
+        {
+            return null;
+        }
+        else if(state.isArithOp())
+        {
+            // all arithOps
+            return null;
+        }
+        else if(state.isBoolOp())
+        {
+            // all boolOps
+            return null;
+        }
+        else if(state.isCompOp())
+        {
+            // all compOps
+            return null;
+        }
+        else
+        {
             return null;
         }
     }
