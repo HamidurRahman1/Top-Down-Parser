@@ -19,6 +19,8 @@ public abstract class Parser extends LexAnalyzer
         // build a parse tree
         FunDefList funDefList = getFunDefList();
 
+        funDefList.printParseTree("");
+
         if (!t.isEmpty())
         {
             errorMsg(5);
@@ -47,7 +49,34 @@ public abstract class Parser extends LexAnalyzer
 
         getToken();
 
+        Exp exp = getExp();
+
         return new FunDef(header, null);
+    }
+
+    public static Exp getExp()
+    {
+        if(state == State.LParen)
+        {
+            String afterParen = t;
+            State now = state;
+            System.out.println(now + " " + afterParen);
+            getToken();
+            System.out.println(state + " " + t);
+            if(state == State.Id)
+            {
+                return new ExpId("");
+            }
+            else
+            {
+                return null;
+            }
+        }
+        else
+        {
+            errorMsg(6);
+            return null;
+        }
     }
 
     public static Header getHeader()
@@ -122,6 +151,7 @@ public abstract class Parser extends LexAnalyzer
             case 3:	displayln(" = expected"); return;
             case 4:	displayln(" ; expected"); return;
             case 5:	displayln(" id expected"); return;
+            case 6:	displayln(" { expected"); return;
         }
     }
 }
