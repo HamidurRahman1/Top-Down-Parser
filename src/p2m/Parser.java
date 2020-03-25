@@ -107,7 +107,22 @@ public abstract class Parser extends LexAnalyzer
 
     public static ExpList getExpList()
     {
-        return new ExpList(null, null);
+        Exp exp = getExp();
+
+        if(exp == null)
+        {
+            errorMsg(2);
+            return null;
+        }
+
+        ExpList expList = getExpList();
+
+        if(errorFound)
+        {
+            return null;
+        }
+
+        return new ExpList(exp, expList);
     }
 
     public static FunOp getFunOp()
@@ -135,6 +150,7 @@ public abstract class Parser extends LexAnalyzer
         }
         else if(state.isArithOp())
         {
+            System.out.println(t + " " + state);
             return getArithOp();
         }
         else if(state.isBoolOp())
