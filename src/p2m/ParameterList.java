@@ -23,7 +23,7 @@ public class ParameterList extends BaseParameterList
 
         indent += " ";
 
-        IO.displayln(indent + indent.length() + parameterId.id);
+        IO.displayln(indent + indent.length() + " " + parameterId.id);
 
         if(parameterList != null)
         {

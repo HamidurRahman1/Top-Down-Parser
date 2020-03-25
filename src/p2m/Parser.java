@@ -19,15 +19,6 @@ public abstract class Parser extends LexAnalyzer
         // build a parse tree
         FunDefList funDefList = getFunDefList();
 
-        System.out.println(t);
-
-        System.out.println(funDefList.funDef == null);
-        System.out.println(funDefList.funDef.header == null);
-        System.out.println(funDefList.funDef.header.funName == null);
-        System.out.println(funDefList.funDef.header.parameterList == null);
-
-        funDefList.printParseTree("");
-
         if (!t.isEmpty())
         {
             errorMsg(5);
@@ -45,7 +36,7 @@ public abstract class Parser extends LexAnalyzer
     {
         FunDef funDef = getFunDef();
 
-//        getToken();
+        getToken();
 
         return new FunDefList(funDef, null);
     }
@@ -85,7 +76,6 @@ public abstract class Parser extends LexAnalyzer
     {
         if(state == State.Id)
         {
-            System.out.println("param -> " + t);
             ParameterList parameterListId = new ParameterList(new ParameterId(t));
             getToken();
             ParameterList parameterList = getParameterList();
@@ -101,18 +91,15 @@ public abstract class Parser extends LexAnalyzer
             }
         }
 
-        errorMsg(5);
+//        errorMsg(5);
 
         return null;
     }
 
     public static FunName getFunName()
     {
-//        System.out.println(state + " " + t.isEmpty());
-
         if(state == State.Id)
         {
-            System.out.println("fun name -> " + t);
             return new FunName(t);
         }
         else
