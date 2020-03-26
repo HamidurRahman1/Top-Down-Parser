@@ -14,6 +14,10 @@ public class FunExp extends Exp
     @Override
     public void printParseTree(String indent)
     {
+        IO.displayln(indent + indent.length() + " <exp>");
+
+        indent += " ";
+
         IO.displayln(indent + indent.length() + " <fun exp>");
 
         funOp.printParseTree(indent + " ");

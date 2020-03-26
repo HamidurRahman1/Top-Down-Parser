@@ -49,8 +49,6 @@ public abstract class Parser extends LexAnalyzer
 
         getToken();
 
-//        System.out.println(t+state);
-
         Exp exp = getExp();
 
         return new FunDef(header, exp);
@@ -60,7 +58,9 @@ public abstract class Parser extends LexAnalyzer
     {
         if(state == State.Id)
         {
-            return new ExpId(t);
+            ExpId expId = new ExpId(t);
+            getToken();
+            return expId;
         }
         else if(state == State.Int)
         {
@@ -104,7 +104,11 @@ public abstract class Parser extends LexAnalyzer
     {
         FunOp funOp = getFunOp();
 
-        // * Mul
+        if(funOp == null || errorFound)
+        {
+            errorMsg(7);
+            return null;
+        }
 
         ExpList expList = getExpList();
 
@@ -113,27 +117,38 @@ public abstract class Parser extends LexAnalyzer
 
     public static ExpList getExpList()
     {
+        System.out.println(t+state);
+
         if(state == State.RParen)
         {
             return new EmptyExpList();
         }
 
-        Exp exp = getExp();
-
-        if(exp == null)
+        if(state == State.Id)
         {
-            errorMsg(2);
-            return null;
+            Exp exp = getExp();
+
+            if(exp == null || errorFound)
+            {
+                errorMsg(2);
+                return null;
+            }
+
+            ExpList expList = getExpList();
+
+            if(expList instanceof EmptyExpList)
+            {
+                return new NonEmptyExpList(exp, expList);
+            }
+            if(errorFound)
+            {
+                return null;
+            }
+            return new NonEmptyExpList(exp, expList);
         }
 
-        ExpList expList = getExpList();
-
-        if(errorFound)
-        {
-            return null;
-        }
-
-        return new NonEmptyExpList(exp, expList);
+        errorMsg(5);
+        return null;
     }
 
     public static FunOp getFunOp()
@@ -173,7 +188,7 @@ public abstract class Parser extends LexAnalyzer
         }
         else
         {
-            errorMsg(1);
+            errorMsg(7);
             return null;
         }
     }
@@ -327,6 +342,7 @@ public abstract class Parser extends LexAnalyzer
             case 4:	displayln(" ; expected"); return;
             case 5:	displayln(" id expected"); return;
             case 6:	displayln(" { expected"); return;
+            case 7: displayln(" id, pair, first, second, arith op, bool op, comp op expected"); return;
         }
     }
 }

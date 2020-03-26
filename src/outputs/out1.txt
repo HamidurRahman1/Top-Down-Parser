@@ -3,9 +3,15 @@
   2 <fun name> square
   2 <parameter list>
    3 x
-   3 y
-   3 z
- 1 <fun exp>
-  2 *
+ 1 <exp>
+  2 <fun exp>
+   3 *
+   3 <exp list>
+    4 <exp>
+     5 x
+    4 <exp>
+     5 x
+    4 <exp>
+     5 i
 
 } : Syntax Error, unexpected symbol where id expected

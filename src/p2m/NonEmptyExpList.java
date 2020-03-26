@@ -16,13 +16,26 @@ public class NonEmptyExpList extends ExpList
     {
         IO.displayln(indent + indent.length() + " <exp list>");
 
-        indent += " ";
+        exp.printParseTree(indent + " ");
 
-        exp.printParseTree(indent);
-
-        if(expList != null)
+        if(expList instanceof NonEmptyExpList)
         {
-            expList.printParseTree(indent);
+            printMultipleParameters(indent + " ", (NonEmptyExpList) expList);
+        }
+    }
+
+    public void printMultipleParameters(String indent, NonEmptyExpList expList1)
+    {
+        if(expList1 == null)
+        {
+            return;
+        }
+
+        expList1.exp.printParseTree(indent);
+
+        if(expList1.expList instanceof NonEmptyExpList)
+        {
+            printMultipleParameters(indent, (NonEmptyExpList) expList1.expList);
         }
     }
 }
