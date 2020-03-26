@@ -16,7 +16,6 @@ public abstract class Parser extends LexAnalyzer
 
         getToken();
 
-        // build a parse tree
         FunDefList funDefList = getFunDefList();
 
         if (!t.isEmpty())
@@ -25,7 +24,6 @@ public abstract class Parser extends LexAnalyzer
         }
         else if(!errorFound)
         {
-            // print the parse tree in linearly indented form in argv[1] file
             funDefList.printParseTree("");
         }
 

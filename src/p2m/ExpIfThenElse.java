@@ -17,15 +17,15 @@ public class ExpIfThenElse extends Exp
     public void printParseTree(String indent)
     {
         printExp(indent);
-        String sLength = indent + " ";
+        indent += " ";
 
-        IO.displayln(sLength + sLength.length() + " if");
-        ifExp.printParseTree(sLength + " ");
+        IO.displayln(indent + indent.length() + " if");
+        ifExp.printParseTree(indent + " ");
 
-        IO.displayln(sLength + sLength.length() + " then");
-        thenExp.printParseTree(sLength + " ");
+        IO.displayln(indent + indent.length() + " then");
+        thenExp.printParseTree(indent + " ");
 
-        IO.displayln(sLength + sLength.length() + " else");
-        elseExp.printParseTree(sLength + " ");
+        IO.displayln(indent + indent.length() + " else");
+        elseExp.printParseTree(indent + " ");
     }
 }
