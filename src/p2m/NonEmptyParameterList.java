@@ -3,15 +3,12 @@ package p2m;
 public class NonEmptyParameterList extends ParameterList
 {
     public String parameterId;
-    public ParameterList bpl;
+    public ParameterList parameterList;
 
-    public NonEmptyParameterList(String parameterId) {
+    public NonEmptyParameterList(String parameterId, ParameterList parameterList)
+    {
         this.parameterId = parameterId;
-    }
-
-    public NonEmptyParameterList(String parameterId, ParameterList bpl) {
-        this.parameterId = parameterId;
-        this.bpl = bpl;
+        this.parameterList = parameterList;
     }
 
     @Override
@@ -19,13 +16,28 @@ public class NonEmptyParameterList extends ParameterList
     {
         IO.displayln(indent + indent.length() + " <parameter list>");
 
-        indent += " ";
+        String indent1 = indent + " ";
 
-        IO.displayln(indent + indent.length() + " " + parameterId);
+        IO.displayln(indent1 + indent1.length() + " " + parameterId);
 
-        if(bpl != null)
+        if(parameterList instanceof NonEmptyParameterList)
         {
-            bpl.printParseTree(indent);
+            printMultipleParameters(indent1, (NonEmptyParameterList) parameterList);
+        }
+    }
+
+    public void printMultipleParameters(String indent, NonEmptyParameterList paramList)
+    {
+        if(paramList == null)
+        {
+            return;
+        }
+
+        IO.displayln(indent + indent.length() + " " + paramList.parameterId);
+
+        if(paramList.parameterList instanceof NonEmptyParameterList)
+        {
+            printMultipleParameters(indent, (NonEmptyParameterList) paramList.parameterList);
         }
     }
 }

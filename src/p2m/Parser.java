@@ -49,9 +49,11 @@ public abstract class Parser extends LexAnalyzer
 
         getToken();
 
-//        Exp exp = getExp();
+//        System.out.println(t+state);
 
-        return new FunDef(header, null);
+        Exp exp = getExp();
+
+        return new FunDef(header, exp);
     }
 
     public static Exp getExp()
@@ -102,6 +104,8 @@ public abstract class Parser extends LexAnalyzer
     {
         FunOp funOp = getFunOp();
 
+        // * Mul
+
         ExpList expList = getExpList();
 
         return new FunExp(funOp, expList);
@@ -109,6 +113,11 @@ public abstract class Parser extends LexAnalyzer
 
     public static ExpList getExpList()
     {
+        if(state == State.RParen)
+        {
+            return new EmptyExpList();
+        }
+
         Exp exp = getExp();
 
         if(exp == null)
@@ -124,7 +133,7 @@ public abstract class Parser extends LexAnalyzer
             return null;
         }
 
-        return new ExpList(exp, null);
+        return new NonEmptyExpList(exp, expList);
     }
 
     public static FunOp getFunOp()
@@ -265,21 +274,30 @@ public abstract class Parser extends LexAnalyzer
 
     public static ParameterList getParameterList()
     {
+        if(state == State.LBrace)
+            return new EmptyParameterList();
+
         if(state == State.Id)
         {
-            NonEmptyParameterList nonEmptyParameterList = new NonEmptyParameterList(t);
+            String param = t;
 
             getToken();
 
             ParameterList parameterList = getParameterList();
 
-            if(parameterList != null || !errorFound)
+            if(parameterList instanceof EmptyParameterList)
             {
-                nonEmptyParameterList.bpl = parameterList;
-                return nonEmptyParameterList;
+                return new NonEmptyParameterList(param, parameterList);
             }
+            if(errorFound)
+            {
+                return null;
+            }
+            return new NonEmptyParameterList(param, parameterList);
         }
-        return new EmptyParameterList();
+
+        errorMsg(5);
+        return null;
     }
 
     public static FunName getFunName()

@@ -3,6 +3,9 @@
   2 <fun name> square
   2 <parameter list>
    3 x
-   3 <parameter list>
+   3 y
+   3 z
+ 1 <fun exp>
+  2 *
 
-* : Syntax Error, unexpected symbol where id expected
+} : Syntax Error, unexpected symbol where id expected
