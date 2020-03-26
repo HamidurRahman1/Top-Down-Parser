@@ -49,9 +49,9 @@ public abstract class Parser extends LexAnalyzer
 
         getToken();
 
-        Exp exp = getExp();
+//        Exp exp = getExp();
 
-        return new FunDef(header, exp);
+        return new FunDef(header, null);
     }
 
     public static Exp getExp()
@@ -267,24 +267,19 @@ public abstract class Parser extends LexAnalyzer
     {
         if(state == State.Id)
         {
-            ParameterList parameterListId = new ParameterList(new ParameterId(t));
+            NonEmptyParameterList nonEmptyParameterList = new NonEmptyParameterList(t);
+
             getToken();
+
             ParameterList parameterList = getParameterList();
 
             if(parameterList != null || !errorFound)
             {
-                parameterListId.parameterList = parameterList;
-                return parameterListId;
-            }
-            else
-            {
-                return null;
+                nonEmptyParameterList.bpl = parameterList;
+                return nonEmptyParameterList;
             }
         }
-
-//        errorMsg(5);
-
-        return null;
+        return new EmptyParameterList();
     }
 
     public static FunName getFunName()
