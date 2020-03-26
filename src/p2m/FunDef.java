@@ -1,6 +1,6 @@
 package p2m;
 
-public class FunDef extends BaseFunDef
+public class FunDef extends BaseFunDefList
 {
      public Header header;
      public Exp exp;

@@ -19,7 +19,7 @@ public abstract class Parser extends LexAnalyzer
         // build a parse tree
         FunDefList funDefList = getFunDefList();
 
-        funDefList.printParseTree("");
+//        funDefList.printParseTree("");
 
         if (!t.isEmpty())
         {
@@ -64,14 +64,19 @@ public abstract class Parser extends LexAnalyzer
         }
         else if(state == State.Int)
         {
-            return new ExpInt(Integer.parseInt(t));
+            ExpInt expInt = new ExpInt(Integer.parseInt(t));
+            getToken();
+            return expInt;
         }
         else if(state == State.Float || state == State.FloatE || state == State.FloatF)
         {
-            return new ExpFloat(Float.parseFloat(t));
+            ExpFloat expFloat = new ExpFloat(Float.parseFloat(t));
+            getToken();
+            return expFloat;
         }
         else if(state == State.Keyword_nil)
         {
+            getToken();
             return new ExpNil();
         }
         else if(state == State.LParen)
@@ -80,18 +85,52 @@ public abstract class Parser extends LexAnalyzer
 
             FunExp funExp = getFunExp();
 
-
-            // check for close brace
-            return funExp;
+            if(state == State.RParen)
+            {
+                getToken();
+                return funExp;
+            }
+            else
+            {
+                errorMsg(1);
+                return null;
+            }
         }
         else if(state == State.Keyword_if)
         {
-            // check for ExpIfThenElse
             getToken();
 
+            Exp exp = getExp();
 
+            if(state == State.Keyword_then)
+            {
+                getToken();
 
-            return null;
+                Exp exp1 = getExp();
+
+                if(state == State.Keyword_else)
+                {
+                    getToken();
+
+                    Exp exp2 = getExp();
+
+                    if(errorFound || exp2 == null)
+                    {
+                        return null;
+                    }
+                    return new ExpIfThenElse(exp, exp1, exp2);
+                }
+                else
+                {
+                    errorMsg(9);
+                    return null;
+                }
+            }
+            else
+            {
+                errorMsg(8);
+                return null;
+            }
         }
         else
         {
@@ -117,8 +156,6 @@ public abstract class Parser extends LexAnalyzer
 
     public static ExpList getExpList()
     {
-        System.out.println(t+state);
-
         if(state == State.RParen)
         {
             return new EmptyExpList();
@@ -343,6 +380,8 @@ public abstract class Parser extends LexAnalyzer
             case 5:	displayln(" id expected"); return;
             case 6:	displayln(" { expected"); return;
             case 7: displayln(" id, pair, first, second, arith op, bool op, comp op expected"); return;
+            case 8: displayln(" then expected"); return;
+            case 9: displayln(" else expected"); return;
         }
     }
 }
