@@ -1,14 +1,5 @@
-square x
+fact n
 {
-	(* x x)
-}
-
-pi
-{
-	3.14159
-}
-
-cylinderVolume length radius
-{
-	(* length (* (pi) (square radius)))
+	if (= n 0) then 1
+	else (* n (fact (- n 1)))
 }

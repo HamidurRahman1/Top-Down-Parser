@@ -20,12 +20,12 @@ public class ExpIfThenElse extends Exp
         String sLength = indent + " ";
 
         IO.displayln(sLength + sLength.length() + " if");
-        ifExp.printParseTree(sLength);
+        ifExp.printParseTree(sLength + " ");
 
         IO.displayln(sLength + sLength.length() + " then");
-        thenExp.printParseTree(sLength);
+        thenExp.printParseTree(sLength + " ");
 
         IO.displayln(sLength + sLength.length() + " else");
-        elseExp.printParseTree(sLength);
+        elseExp.printParseTree(sLength + " ");
     }
 }

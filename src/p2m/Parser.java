@@ -54,8 +54,6 @@ public abstract class Parser extends LexAnalyzer
 
         getToken();
 
-        System.out.println(t+state);
-
         Exp exp = getExp();
 
         return new FunDef(header, exp);
@@ -158,6 +156,11 @@ public abstract class Parser extends LexAnalyzer
 
         ExpList expList = getExpList();
 
+        if(errorFound)
+        {
+            return null;
+        }
+
         return new FunExp(funOp, expList);
     }
 
@@ -168,7 +171,10 @@ public abstract class Parser extends LexAnalyzer
             return new EmptyExpList();
         }
 
-        if(state == State.Id || state == State.LParen)
+        if(state == State.Id || state == State.Int
+                || state == State.Float || state == State.FloatE
+                || state == State.FloatF || state == State.Keyword_nil
+                || state == State.LParen || state == State.Keyword_if)
         {
             Exp exp = getExp();
 

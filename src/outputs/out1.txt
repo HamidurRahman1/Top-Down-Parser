@@ -1,48 +1,38 @@
 0 <fun def>
  1 <header>
-  2 <fun name> square
+  2 <fun name> fact
   2 <parameter list>
-   3 x
+   3 n
  1 <exp>
-  2 <fun exp>
-   3 *
-   3 <exp list>
-    4 <exp>
-     5 x
-    4 <exp>
-     5 x
-
-0 <fun def>
- 1 <header>
-  2 <fun name> pi
-  2 <parameter list>
- 1 <exp>
-  2 3.14159
-
-0 <fun def>
- 1 <header>
-  2 <fun name> cylinderVolume
-  2 <parameter list>
-   3 length
-   3 radius
- 1 <exp>
-  2 <fun exp>
-   3 *
-   3 <exp list>
-    4 <exp>
-     5 length
-    4 <exp>
-     5 <fun exp>
-      6 *
-      6 <exp list>
-       7 <exp>
-        8 <fun exp>
-         9 pi
-         9 <exp list>
-       7 <exp>
-        8 <fun exp>
-         9 square
-         9 <exp list>
-          10 <exp>
-           11 radius
+  2 if
+   3 <exp>
+    4 <fun exp>
+     5 =
+     5 <exp list>
+      6 <exp>
+       7 n
+      6 <exp>
+       7 0
+  2 then
+   3 <exp>
+    4 1
+  2 else
+   3 <exp>
+    4 <fun exp>
+     5 *
+     5 <exp list>
+      6 <exp>
+       7 n
+      6 <exp>
+       7 <fun exp>
+        8 fact
+        8 <exp list>
+         9 <exp>
+          10 <fun exp>
+           11 -
+           11 <exp list>
+            12 <exp>
+             13 n
+            12 <exp>
+             13 1
 
