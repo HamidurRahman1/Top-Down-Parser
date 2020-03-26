@@ -50,6 +50,12 @@ public abstract class Parser extends LexAnalyzer
     {
         Header header = getHeader();
 
+        if(state != State.LBrace)
+        {
+            errorMsg(6);
+            return null;
+        }
+
         getToken();
 
         Exp exp = getExp();
@@ -371,7 +377,7 @@ public abstract class Parser extends LexAnalyzer
         }
         else
         {
-            errorMsg(5);
+            errorMsg(11);
             return null;
         }
     }
@@ -384,6 +390,7 @@ public abstract class Parser extends LexAnalyzer
 
         switch( messageKey )
         {
+            case 11: displayln(" fun name expected"); return;
             case 1:	displayln(" arith op or ) expected"); return;
             case 2: displayln(" id, int, float, or ( expected"); return;
             case 3:	displayln(" = expected"); return;
