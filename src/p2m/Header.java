@@ -1,6 +1,6 @@
 package p2m;
 
-public class Header
+public class Header extends BaseFunDef
 {
     public FunName funName;
     public ParameterList parameterList;
@@ -16,6 +16,7 @@ public class Header
         this.parameterList = parameterList;
     }
 
+    @Override
     public void printParseTree(String indent)
     {
         IO.displayln(indent + indent.length() + " <header>");

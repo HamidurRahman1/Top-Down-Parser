@@ -19,8 +19,6 @@ public abstract class Parser extends LexAnalyzer
         // build a parse tree
         FunDefList funDefList = getFunDefList();
 
-//        funDefList.printParseTree("");
-
         if (!t.isEmpty())
         {
             errorMsg(5);
@@ -48,6 +46,8 @@ public abstract class Parser extends LexAnalyzer
         Header header = getHeader();
 
         getToken();
+
+        System.out.println(t+state);
 
         Exp exp = getExp();
 
@@ -161,7 +161,7 @@ public abstract class Parser extends LexAnalyzer
             return new EmptyExpList();
         }
 
-        if(state == State.Id)
+        if(state == State.Id || state == State.LParen)
         {
             Exp exp = getExp();
 
@@ -170,6 +170,8 @@ public abstract class Parser extends LexAnalyzer
                 errorMsg(2);
                 return null;
             }
+
+            System.out.println(t+state+"1");
 
             ExpList expList = getExpList();
 
@@ -183,6 +185,8 @@ public abstract class Parser extends LexAnalyzer
             }
             return new NonEmptyExpList(exp, expList);
         }
+
+        System.out.println(t+state+"d");
 
         errorMsg(5);
         return null;

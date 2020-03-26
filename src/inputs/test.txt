@@ -1,5 +1,4 @@
-fact n
+cylinderVolume length radius
 {
-	if (= n 0) then 1
-	else (* n (fact (- n 1)))
+	(* length (* (pi) (square radius)))
 }
