@@ -1,5 +1,26 @@
 0 <fun def>
  1 <header>
+  2 <fun name> square
+  2 <parameter list>
+   3 x
+ 1 <exp>
+  2 <fun exp>
+   3 *
+   3 <exp list>
+    4 <exp>
+     5 x
+    4 <exp>
+     5 x
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> pi
+  2 <parameter list>
+ 1 <exp>
+  2 3.14159
+
+0 <fun def>
+ 1 <header>
   2 <fun name> cylinderVolume
   2 <parameter list>
    3 length

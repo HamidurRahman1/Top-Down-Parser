@@ -38,7 +38,14 @@ public abstract class Parser extends LexAnalyzer
 
         getToken();
 
-        return new FunDefList(funDef, null);
+        if(t.isEmpty())
+        {
+            return new FunDefList(funDef);
+        }
+
+        FunDefList funDefList = getFunDefList();
+
+        return new FunDefList(funDef, funDefList);
     }
 
     public static FunDef getFunDef()
@@ -171,13 +178,11 @@ public abstract class Parser extends LexAnalyzer
                 return null;
             }
 
-            System.out.println(t+state+"1");
-
             ExpList expList = getExpList();
 
             if(expList instanceof EmptyExpList)
             {
-                return new NonEmptyExpList(exp, expList);
+                return new NonEmptyExpList(exp, null);
             }
             if(errorFound)
             {
@@ -185,8 +190,6 @@ public abstract class Parser extends LexAnalyzer
             }
             return new NonEmptyExpList(exp, expList);
         }
-
-        System.out.println(t+state+"d");
 
         errorMsg(5);
         return null;

@@ -1,3 +1,13 @@
+square x
+{
+	(* x x)
+}
+
+pi
+{
+	3.14159
+}
+
 cylinderVolume length radius
 {
 	(* length (* (pi) (square radius)))
