@@ -1,36 +1,4 @@
-if : Syntax Error, unexpected symbol where id expected
-if : Syntax Error, unexpected symbol where { expected
-( : Syntax Error, unexpected symbol where fun name expected
-( : Syntax Error, unexpected symbol where { expected
-= : Syntax Error, unexpected symbol where fun name expected
-= : Syntax Error, unexpected symbol where { expected
-0 : Syntax Error, unexpected symbol where id expected
-0 : Syntax Error, unexpected symbol where { expected
-) : Syntax Error, unexpected symbol where fun name expected
-) : Syntax Error, unexpected symbol where { expected
-then : Syntax Error, unexpected symbol where fun name expected
-then : Syntax Error, unexpected symbol where { expected
-1 : Syntax Error, unexpected symbol where fun name expected
-1 : Syntax Error, unexpected symbol where { expected
-else : Syntax Error, unexpected symbol where fun name expected
-else : Syntax Error, unexpected symbol where { expected
-( : Syntax Error, unexpected symbol where fun name expected
-( : Syntax Error, unexpected symbol where { expected
-* : Syntax Error, unexpected symbol where fun name expected
-* : Syntax Error, unexpected symbol where { expected
-( : Syntax Error, unexpected symbol where id expected
-( : Syntax Error, unexpected symbol where { expected
-( : Syntax Error, unexpected symbol where id expected
-( : Syntax Error, unexpected symbol where { expected
-- : Syntax Error, unexpected symbol where fun name expected
-- : Syntax Error, unexpected symbol where { expected
-1 : Syntax Error, unexpected symbol where id expected
-1 : Syntax Error, unexpected symbol where { expected
-) : Syntax Error, unexpected symbol where fun name expected
-) : Syntax Error, unexpected symbol where { expected
-) : Syntax Error, unexpected symbol where fun name expected
-) : Syntax Error, unexpected symbol where { expected
-) : Syntax Error, unexpected symbol where fun name expected
-) : Syntax Error, unexpected symbol where { expected
-} : Syntax Error, unexpected symbol where fun name expected
-} : Syntax Error, unexpected symbol where { expected
+& : Lexical Error, invalid token
+& : Syntax Error, unexpected symbol where id expected
+& : Syntax Error, unexpected symbol where { expected
+& : Syntax Error, unexpected symbol where fun name expected

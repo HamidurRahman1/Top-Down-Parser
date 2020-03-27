@@ -18,9 +18,9 @@ public abstract class Parser extends LexAnalyzer
 
         FunDefList funDefList = getFunDefList();
 
-        if (!t.isEmpty())
+        if(funDefList == null || !t.isEmpty())
         {
-            errorMsg(5);
+            errorMsg(11);
         }
         else if(!errorFound)
         {
@@ -33,6 +33,11 @@ public abstract class Parser extends LexAnalyzer
     public static FunDefList getFunDefList()
     {
         FunDef funDef = getFunDef();
+
+        if(funDef == null)
+        {
+            return null;
+        }
 
         getToken();
 
@@ -49,6 +54,11 @@ public abstract class Parser extends LexAnalyzer
     public static FunDef getFunDef()
     {
         Header header = getHeader();
+
+        if(header == null)
+        {
+            return null;
+        }
 
         if(state != State.LBrace)
         {
@@ -375,11 +385,7 @@ public abstract class Parser extends LexAnalyzer
         {
             return new FunName(t);
         }
-        else
-        {
-            errorMsg(11);
-            return null;
-        }
+        return null;
     }
 
     public static void errorMsg(int messageKey)
