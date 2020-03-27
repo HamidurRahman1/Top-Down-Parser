@@ -4,11 +4,8 @@ public abstract class Parser extends LexAnalyzer
 {
     public static boolean errorFound = false;
 
-    public static void main(String[] argv) throws NullPointerException
+    public static void main(String[] argv)
     {
-        // argv[0]: input file containing a fun def list
-        // argv[1]: output file displaying the parse tree
-
         setIO("/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/inputs/test.txt",
                 "/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/outputs/out1.txt");
 
@@ -20,7 +17,7 @@ public abstract class Parser extends LexAnalyzer
 
         if(funDefList == null || !t.isEmpty())
         {
-            errorMsg(11);
+            errorMsg(0);
         }
         else if(!errorFound)
         {
@@ -34,7 +31,7 @@ public abstract class Parser extends LexAnalyzer
     {
         FunDef funDef = getFunDef();
 
-        if(funDef == null)
+        if(funDef == null || errorFound)
         {
             return null;
         }
@@ -55,12 +52,7 @@ public abstract class Parser extends LexAnalyzer
     {
         Header header = getHeader();
 
-        if(header == null)
-        {
-            return null;
-        }
-
-        if(state != State.LBrace)
+        if(errorFound || state != State.LBrace)
         {
             errorMsg(6);
             return null;
@@ -69,6 +61,17 @@ public abstract class Parser extends LexAnalyzer
         getToken();
 
         Exp exp = getExp();
+
+        if(state != State.RBrace)
+        {
+            errorMsg(12);
+            return null;
+        }
+
+        if(exp == null || errorFound)
+        {
+            return null;
+        }
 
         return new FunDef(header, exp);
     }
@@ -111,7 +114,7 @@ public abstract class Parser extends LexAnalyzer
             }
             else
             {
-                errorMsg(1);
+                errorMsg(6);
                 return null;
             }
         }
@@ -127,6 +130,12 @@ public abstract class Parser extends LexAnalyzer
 
                 Exp exp1 = getExp();
 
+                if(errorFound || exp1 == null)
+                {
+                    errorMsg(2);
+                    return null;
+                }
+
                 if(state == State.Keyword_else)
                 {
                     getToken();
@@ -135,6 +144,7 @@ public abstract class Parser extends LexAnalyzer
 
                     if(errorFound || exp2 == null)
                     {
+                        errorMsg(7);
                         return null;
                     }
                     return new ExpIfThenElse(exp, exp1, exp2);
@@ -153,7 +163,7 @@ public abstract class Parser extends LexAnalyzer
         }
         else
         {
-            errorMsg(7);
+            errorMsg(10);
             return null;
         }
     }
@@ -164,7 +174,6 @@ public abstract class Parser extends LexAnalyzer
 
         if(funOp == null || errorFound)
         {
-            errorMsg(7);
             return null;
         }
 
@@ -194,7 +203,6 @@ public abstract class Parser extends LexAnalyzer
 
             if(exp == null || errorFound)
             {
-                errorMsg(2);
                 return null;
             }
 
@@ -211,7 +219,7 @@ public abstract class Parser extends LexAnalyzer
             return new NonEmptyExpList(exp, expList);
         }
 
-        errorMsg(5);
+        errorMsg(1);
         return null;
     }
 
@@ -339,7 +347,7 @@ public abstract class Parser extends LexAnalyzer
 
             ParameterList parameterList = getParameterList();
 
-            if(parameterList == null)
+            if(errorFound || parameterList == null)
             {
                 return new Header(funName);
             }
@@ -385,7 +393,11 @@ public abstract class Parser extends LexAnalyzer
         {
             return new FunName(t);
         }
-        return null;
+        else
+        {
+            errorMsg(0);
+            return null;
+        }
     }
 
     public static void errorMsg(int messageKey)
@@ -396,16 +408,19 @@ public abstract class Parser extends LexAnalyzer
 
         switch( messageKey )
         {
-            case 11: displayln(" fun name expected"); return;
+            case 0: displayln(" fun name expected"); return;
             case 1:	displayln(" arith op or ) expected"); return;
             case 2: displayln(" id, int, float, or ( expected"); return;
             case 3:	displayln(" = expected"); return;
             case 4:	displayln(" ; expected"); return;
             case 5:	displayln(" id expected"); return;
             case 6:	displayln(" { expected"); return;
-            case 7: displayln(" id, pair, first, second, arith op, bool op, comp op expected"); return;
+            case 7: displayln(" id, pair, first, second, arith op, bool op or comp op expected"); return;
             case 8: displayln(" then expected"); return;
             case 9: displayln(" else expected"); return;
+            case 10: displayln(" id, int, float, ( or if expected"); return;
+            case 11: displayln(" id or { "); return;
+            case 12: displayln(" } expected"); return;
         }
     }
 }
