@@ -150,6 +150,7 @@ public abstract class LexAnalyzer extends IO
             keywordCheck();
         else if ( i == 0 )
             displayln(t + " : Lexical Error, invalid token");
+        System.out.println("t - "+t);
     }
 
     public static void setLex()

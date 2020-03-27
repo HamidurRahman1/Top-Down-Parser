@@ -1,6 +1,6 @@
 package p2m;
 
-public abstract class Exp extends BaseExp
+public abstract class Exp extends BaseFunDef
 {
     public void printExp(String indent)
     {

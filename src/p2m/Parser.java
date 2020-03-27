@@ -15,7 +15,7 @@ public abstract class Parser extends LexAnalyzer
 
         FunDefList funDefList = getFunDefList();
 
-        if(funDefList == null || !t.isEmpty())
+        if(!t.isEmpty())
         {
             errorMsg(0);
         }
@@ -38,12 +38,17 @@ public abstract class Parser extends LexAnalyzer
 
         getToken();
 
-        if(t.isEmpty())
+        if(state == State.Start)
         {
             return new FunDefList(funDef);
         }
 
         FunDefList funDefList = getFunDefList();
+
+        if(errorFound || funDefList == null)
+        {
+            return null;
+        }
 
         return new FunDefList(funDef, funDefList);
     }
@@ -107,6 +112,11 @@ public abstract class Parser extends LexAnalyzer
 
             FunExp funExp = getFunExp();
 
+            if(errorFound)
+            {
+                return null;
+            }
+
             if(state == State.RParen)
             {
                 getToken();
@@ -114,7 +124,7 @@ public abstract class Parser extends LexAnalyzer
             }
             else
             {
-                errorMsg(6);
+                errorMsg(13);
                 return null;
             }
         }
@@ -144,7 +154,6 @@ public abstract class Parser extends LexAnalyzer
 
                     if(errorFound || exp2 == null)
                     {
-                        errorMsg(7);
                         return null;
                     }
                     return new ExpIfThenElse(exp, exp1, exp2);
@@ -219,7 +228,7 @@ public abstract class Parser extends LexAnalyzer
             return new NonEmptyExpList(exp, expList);
         }
 
-        errorMsg(1);
+//        errorMsg(1);
         return null;
     }
 
@@ -383,7 +392,7 @@ public abstract class Parser extends LexAnalyzer
             return new NonEmptyParameterList(param, parameterList);
         }
 
-        errorMsg(5);
+//        errorMsg(5);
         return null;
     }
 
@@ -418,9 +427,10 @@ public abstract class Parser extends LexAnalyzer
             case 7: displayln(" id, pair, first, second, arith op, bool op or comp op expected"); return;
             case 8: displayln(" then expected"); return;
             case 9: displayln(" else expected"); return;
-            case 10: displayln(" id, int, float, ( or if expected"); return;
+            case 10: displayln(" id, int, float, nil, ( or if expected"); return;
             case 11: displayln(" id or { "); return;
             case 12: displayln(" } expected"); return;
+            case 13: displayln(" ) expected"); return;
         }
     }
 }

@@ -1,124 +1,54 @@
-////////////////////// New2 //////////////////////////////////////
 
-BaseFunDefList {}
-    -> FunDefList {}
+* FunName
 
-BaseFunDef {}
-    -> FunDef {}
+* State
 
-BaseHeader {}
-    -> Header {}
+* IO
+    -> LexAnalyzer
+        -> Parser
 
-BaseFunName {}
-    -> FunName {}
+* BaseFunDefList
+    -> FunDef
+    -> FunDefList
 
-BaseParameterList {}
-    -> ParameterList {}
+* BaseFunDef
+    -> Header
+    -> Exp
+        -> ExpId
+        -> ExpInt
+        -> ExpFloat
+        -> ExpFloatE
+        -> ExpFloatF
+        -> ExpNil
+        -> FunExp
+        -> ExpIfThenElse
 
-BaseExp {}
-    -> Exp {}
-        -> ExpId {}
-        -> ExpInt {}
-        -> ExpFloat {}
-        -> ExpFloatE {}
-        -> ExpFloatF {}
-        -> ExpNil {}
-        -> FunExp {}
-        -> ExpIfTheElse {}
+* ParameterList
+    -> EmptyParameterList
+    -> NonEmptyParameterList
 
-BaseFunOp {}
-    -> FunOp {}
-        -> FunOpId {}
-        -> FunOpPair {}
-        -> FunOpFirst {}
-        -> FunOpSecond {}
-        -> ArithOp {}
-            -> ArithOpAdd {}
-            -> ArithOpSub {}
-            -> ArithOpMul {}
-            -> ArithOpDiv {}
-        -> BoolOp {}
-            -> BoolOpOr {}
-            -> BoolOpAnd {}
-            -> BoolOpNot {}
-        -> CompOP {}
-            -> CompOPLt {}
-            -> CompOPLe {}
-            -> CompOPGt {}
-            -> CompOPGe {}
-            -> CompOPEq {}
+* BaseFunOp
+    -> FunOp
+        -> FunOpId 
+        -> FunOpPair 
+        -> FunOpFirst 
+        -> FunOpSecond
+        -> ArithOp 
+            -> ArithOpAdd 
+            -> ArithOpSub 
+            -> ArithOpMul 
+            -> ArithOpDiv 
+        -> BoolOp 
+            -> BoolOpOr 
+            -> BoolOpAnd 
+            -> BoolOpNot 
+        -> CompOP 
+            -> CompOPLt 
+            -> CompOPLe 
+            -> CompOPGt 
+            -> CompOPGe 
+            -> CompOPEq 
 
-BaseExpList {}
-    -> ExpList {}
-
-IO {}
-    -> LexAnalyzer {}
-        -> Parser {}
-
-State {}
-
-////////////////////// Old1 //////////////////////////////////////
-
-
-abstract class FunDefList   {}
-    - class FunDef extends FunDefList {}
-    - class FunDefRecursive extends FunDefList {}
-
-abstract class FunDef       {}
-    - class FunDefHeader extends FunDef {}
-    - class Exp extends FunDef {}
-
-abstract class Header       {}
-    - class FunName extends Header {}
-    - class ParameterList extends Header {}
-
-abstract class FunName      {}      // n = 1 tbd for body
-
-abstract class ParameterList    {}
-    - class EmptyParameterList extends ParameterList {}
-    - class NonEmptyParameterList extends ParameterList {}
-
-abstract class Exp          {}
-    - class ExpId extends Exp {}
-    - class ExpInt extends Exp {}
-    - class ExpFloat extends Exp {}
-    - class ExpFloatE extends Exp {}
-    - class ExpFloatF extends Exp {}
-    - class ExpNil extends Exp {}
-    - class ExpFunExp extends Exp {}
-    - class ExpIfThenElse extends Exp {}
-
-abstract class FunExp       {}
-    - class FunExpFunOp extends FunExp {}
-    - class FunExpExpList extends FunExp {}
-
-abstract class FunOp        {}
-    - class FunOpId extends FunOp {}
-    - class FunOpPair extends FunOp {}
-    - class FunOpFirst extends FunOp {}
-    - class FunOpSecond extends FunOp {}
-    - class FunOpArithOp extends FunOp {}
-    - class FunOpBoolOp extends FunOp {}
-    - class FunOpCompOp extends FunOp {}
-
-abstract class ArithOp extends FunOp      {}
-    - class ArithOpPlus extends ArithOp {}
-    - class ArithOpMinus extends ArithOp {}
-    - class ArithOpMul extends ArithOp {}
-    - class ArithOpDiv extends ArithOp {}
-
-abstract class BoolOp extends FunOp       {}
-    - class BoolOpOr extends BoolOp {}
-    - class BoolOpAnd extends BoolOp {}
-    - class BoolOpNot extends BoolOp {}
-
-abstract class CompOp extends FunOp      {}
-    - class CompOpLt extends CompOp {}
-    - class CompOpLe extends CompOp {}
-    - class CompOpGt extends CompOp {}
-    - class CompOpGe extends CompOp {}
-    - class CompOpEq extends CompOp {}
-
-abstract class ExpList      {}
-    - class EmptyExpList extends ExpList {}
-    - class NonEmptyExpList extends ExpList {}
+* ExpList
+    -> EmptyExpList
+    -> NonEmptyExpList
