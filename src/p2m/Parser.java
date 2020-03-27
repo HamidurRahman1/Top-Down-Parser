@@ -7,7 +7,7 @@ public abstract class Parser extends LexAnalyzer
     public static void main(String[] argv)
     {
         setIO("/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/inputs/test.txt",
-                "/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/outputs/out1.txt");
+                "/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/outputs/out.txt");
 
         setLex();
 
