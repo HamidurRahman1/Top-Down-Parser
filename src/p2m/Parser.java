@@ -6,7 +6,7 @@ public abstract class Parser extends LexAnalyzer
 
     public static void main(String[] argv)
     {
-        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/inputs/test.txt",
+        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/inputs/in1.txt",
                 "/Users/hamidurrahman/Downloads/GitHub/Project--TopDownParser/src/outputs/out.txt");
 
         setLex();
@@ -59,7 +59,8 @@ public abstract class Parser extends LexAnalyzer
 
         if(errorFound || state != State.LBrace)
         {
-            errorMsg(6);
+//            errorMsg(6);
+            errorMsg(11);
             return null;
         }
 
@@ -142,7 +143,7 @@ public abstract class Parser extends LexAnalyzer
 
                 if(errorFound || exp1 == null)
                 {
-                    errorMsg(2);
+//                    errorMsg(2);
                     return null;
                 }
 
@@ -418,16 +419,14 @@ public abstract class Parser extends LexAnalyzer
         switch( messageKey )
         {
             case 0: displayln(" fun name expected"); return;
-            case 1:	displayln(" arith op or ) expected"); return;
-            case 2: displayln(" id, int, float, or ( expected"); return;
-            case 3:	displayln(" = expected"); return;
-            case 4:	displayln(" ; expected"); return;
+//            case 1:	displayln(" arith op or ) expected"); return;
+//            case 2: displayln(" id, int, float, or ( expected"); return;
             case 5:	displayln(" id expected"); return;
-            case 6:	displayln(" { expected"); return;
+//            case 6:	displayln(" { expected"); return;
             case 7: displayln(" id, pair, first, second, arith op, bool op or comp op expected"); return;
             case 8: displayln(" then expected"); return;
             case 9: displayln(" else expected"); return;
-            case 10: displayln(" id, int, float, nil, ( or if expected"); return;
+            case 10: displayln(" id, int, float, floatE, floatF, nil, ( or if expected"); return;
             case 11: displayln(" id or { "); return;
             case 12: displayln(" } expected"); return;
             case 13: displayln(" ) expected"); return;
