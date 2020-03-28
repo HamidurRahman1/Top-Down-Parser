@@ -58,7 +58,6 @@ public abstract class Parser extends LexAnalyzer
 
         if(errorFound || state != State.LBrace)
         {
-//            errorMsg(6);
             errorMsg(11);
             return null;
         }
@@ -142,7 +141,6 @@ public abstract class Parser extends LexAnalyzer
 
                 if(errorFound || exp1 == null)
                 {
-//                    errorMsg(2);
                     return null;
                 }
 
@@ -228,7 +226,6 @@ public abstract class Parser extends LexAnalyzer
             return new NonEmptyExpList(exp, expList);
         }
 
-//        errorMsg(1);
         return null;
     }
 
@@ -371,7 +368,9 @@ public abstract class Parser extends LexAnalyzer
     public static ParameterList getParameterList()
     {
         if(state == State.LBrace)
+        {
             return new EmptyParameterList();
+        }
 
         if(state == State.Id)
         {
@@ -391,8 +390,6 @@ public abstract class Parser extends LexAnalyzer
             }
             return new NonEmptyParameterList(param, parameterList);
         }
-
-//        errorMsg(5);
         return null;
     }
 
@@ -418,10 +415,6 @@ public abstract class Parser extends LexAnalyzer
         switch( messageKey )
         {
             case 0: displayln(" fun name expected"); return;
-//            case 1:	displayln(" arith op or ) expected"); return;
-//            case 2: displayln(" id, int, float, or ( expected"); return;
-            case 5:	displayln(" id expected"); return;
-//            case 6:	displayln(" { expected"); return;
             case 7: displayln(" id, pair, first, second, arith op, bool op or comp op expected"); return;
             case 8: displayln(" then expected"); return;
             case 9: displayln(" else expected"); return;
